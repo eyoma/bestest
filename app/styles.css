@@ -1,0 +1,8 @@
+table,
+tr {
+  border: 1px solid black;
+}
+
+.disabled {
+  background-color: grey;
+}

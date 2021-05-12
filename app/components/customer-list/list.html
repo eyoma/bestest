@@ -1,0 +1,27 @@
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Location</th>
+          <th>Location Short</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          ui-sref="person({ personId: person.id })"
+          ng-class="{'disabled': person.status == 'Inactive'}"
+          ng-repeat="person in $ctrl.people"
+        >
+          <td>{{ person.firstname }}</td>
+          <td>{{ person.lastname }}</td>
+          <td>{{ person.location }}</td>
+          <td>{{ person.locationshort }}</td>
+          <td>{{ person.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
