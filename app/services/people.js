@@ -53,15 +53,11 @@ module.exports = function (ngModule){
           },
       
           postPerson: function () {
-            //TODO: refactor to not call the api if the data is already available
-            // var firstcustomer = service.getAllPeople().then(function (people) {
-            //     return people[0];
-            // });
+
             var firstcustomer = rawpeoplelist[0]
             var objJsonB64 = btoa(JSON.stringify(firstcustomer))
 
-
-            console.log(firstcustomer, objJsonB64 )
+            // console.log(firstcustomer, objJsonB64 )
             var durl = "https://ballistictest.azurewebsites.net/api/customer",
               ddata = {
                 firstcustomer: objJsonB64,
