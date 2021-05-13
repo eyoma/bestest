@@ -31,7 +31,7 @@ var states = [
     }
   ];
 
-  // Loop over the state definitions and register them
+  // Looping over the state definitions to register them
   states.forEach(function (state) {
     $stateProvider.state(state);
   });

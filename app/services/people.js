@@ -19,7 +19,7 @@ module.exports = function (ngModule){
         var service = {
           getAllPeople: function () {
             return $http
-              .get("data/customersapi.json", { cache: true })
+              .get("https://ballistictest.azurewebsites.net/api/customers", { cache: true })
               .then(function (resp) {
                 var cleandata = resp.data.map((user) => {
                   // {id: 1, name: ‘John Doe’, location: ‘AB’, active: true}
@@ -30,7 +30,7 @@ module.exports = function (ngModule){
                   user.status = user.active ? "Active" : "Inactive";
                   return user;
                 });
-                //service.postPerson();
+                
                 return cleandata;
               }, function (error) {
                   return {err: `API call to get customers failed with status ${error.status}`}
@@ -52,8 +52,7 @@ module.exports = function (ngModule){
           postPerson: function () {
             //TODO: refactor to not call the api if the data is already available
             var firstcustomer = service.getAllPeople().then(function (people) {
-              console.log("people here", people);
-              return people[0];
+                return people[0];
             });
             var durl = "https://ballistictest.azurewebsites.net/api/customer",
               ddata = {
@@ -72,7 +71,6 @@ module.exports = function (ngModule){
                 return {err: false}
               },
               function (error) {
-                  console.log("wertyuiophjj")
                 return {err: `API call to POST customer failed with status ${error.status}`}
             }
             );
