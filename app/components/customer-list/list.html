@@ -1,4 +1,4 @@
-<div>
+<div >
     <table>
       <thead>
         <tr>
@@ -13,7 +13,7 @@
         <tr
           ui-sref="person({ personId: person.id })"
           ng-class="{'disabled': person.status == 'Inactive'}"
-          ng-repeat="person in $ctrl.people"
+          ng-repeat="person in vm.people"
         >
           <td>{{ person.firstname }}</td>
           <td>{{ person.lastname }}</td>
@@ -23,5 +23,6 @@
         </tr>
       </tbody>
     </table>
+    <p ng-if="vm.people.err" style="color: red;"> {{vm.people.err}} </p>
   </div>
   

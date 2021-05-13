@@ -32,7 +32,10 @@ module.exports = function (ngModule){
                 });
                 //service.postPerson();
                 return cleandata;
-              });
+              }, function (error) {
+                  return {err: `API call to get customers failed with status ${error.status}`}
+              }
+              );
           },
       
           getPerson: function (id) {
@@ -41,6 +44,7 @@ module.exports = function (ngModule){
             }
       
             return service.getAllPeople().then(function (people) {
+                if (people.err) return {err: "Was unable to retrieve customer data"}
               return people.find(personMatchesParam);
             });
           },
@@ -57,22 +61,21 @@ module.exports = function (ngModule){
                 timestamp: new Date().toISOString()
               };
       
-            // $http({
-            //   method: "POST",
-            //   url: durl,
-            //   data: ddata,
-            //   headers: { "x-client-id": 12345 }
-            // }).then(
-            //   function (response) {
-            //     // success
-            //     console.log("success here");
-            //   },
-            //   function (response) {
-            //     // optional
-            //     // failed
-            //     console.log("failed here");
-            //   }
-            // );
+            return $http({
+              method: "POST",
+              url: durl,
+              data: ddata,
+              headers: { "x-client-id": 12345 }
+            }).then(
+              function (response) {
+                // success
+                return {err: false}
+              },
+              function (error) {
+                  console.log("wertyuiophjj")
+                return {err: `API call to POST customer failed with status ${error.status}`}
+            }
+            );
           }
         };
       

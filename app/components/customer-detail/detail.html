@@ -7,4 +7,5 @@
 <div>Status: {{$ctrl.person.status}}</div>
 
 <br />
+<p ng-if="$ctrl.person.err" style="color: red;"> {{$ctrl.person.err}} </p>
 <a ui-sref="people" ui-sref-active="active">CUSTOMER LIST</a>
