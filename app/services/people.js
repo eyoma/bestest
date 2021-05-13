@@ -16,11 +16,14 @@ module.exports = function (ngModule){
           NU: "Nunavut"
         };
       
+        var rawpeoplelist ;
         var service = {
           getAllPeople: function () {
             return $http
               .get("https://ballistictest.azurewebsites.net/api/customers", { cache: true })
               .then(function (resp) {
+                rawpeoplelist = JSON.parse(JSON.stringify(resp.data));
+                
                 var cleandata = resp.data.map((user) => {
                   // {id: 1, name: ‘John Doe’, location: ‘AB’, active: true}
                   user.firstname = user.name.split(" ")[0];
@@ -51,12 +54,17 @@ module.exports = function (ngModule){
       
           postPerson: function () {
             //TODO: refactor to not call the api if the data is already available
-            var firstcustomer = service.getAllPeople().then(function (people) {
-                return people[0];
-            });
+            // var firstcustomer = service.getAllPeople().then(function (people) {
+            //     return people[0];
+            // });
+            var firstcustomer = rawpeoplelist[0]
+            var objJsonB64 = btoa(JSON.stringify(firstcustomer))
+
+
+            console.log(firstcustomer, objJsonB64 )
             var durl = "https://ballistictest.azurewebsites.net/api/customer",
               ddata = {
-                firstcustomer: JSON.stringify(firstcustomer),
+                firstcustomer: objJsonB64,
                 timestamp: new Date().toISOString()
               };
       
