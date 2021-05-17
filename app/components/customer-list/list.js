@@ -1,5 +1,8 @@
 module.exports = function (ngModule){
 
+  if (ON_TEST){
+    require('./list.test')(ngModule)
+  }
     ngModule.component("customers", {
         controllerAs: "vm",
         controller: listController,
